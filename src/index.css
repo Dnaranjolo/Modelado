@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url("./fondo.jpg");
+  background-color: rgb(162, 202, 207);
   width: 90vw;
 }
 

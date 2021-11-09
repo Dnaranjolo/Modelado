@@ -22,27 +22,27 @@ class Form extends PureComponent {
     state = {};
     onChange = async ({ target: { id, value } }) => {
         await this.setState({ [id]: id === "formula" || id === "h" || !value? value : parseInt(value) });
-        const { t0, n, h, b } = this.state;
+        const { t0, n, h, tf } = this.state;
         if (id==="n" && n){
-            if (h) this.setState({ b: parseInt(t0 + n * parseFloat(h)) });
-            else if (b) this.setState({ h: (t0 + b)/n });
+            if (h) this.setState({ tf: parseInt(t0 + n * parseFloat(h)) });
+            else if (tf) this.setState({ h: (t0 + tf)/n });
         }
         else if (id==="h" && h){
-            if (b) this.setState({ n: (b - t0)/parseFloat(h) });
-            else if (n) this.setState({ b: parseInt(t0 + n * parseFloat(h)) });
+            if (tf) this.setState({ n: (tf - t0)/parseFloat(h) });
+            else if (n) this.setState({ tf: parseInt(t0 + n * parseFloat(h)) });
         }
-        else if (id==="b" && b){
-            if (h) this.setState({ n: (b - t0)/parseFloat(h) });
-            else if (n) this.setState({ h: (b - t0) / n });
+        else if (id==="tf" && tf){
+            if (h) this.setState({ n: (tf - t0)/parseFloat(h) });
+            else if (n) this.setState({ h: (tf - t0) / n });
         }
-        else if (id==="t0" && t0 && n && h) this.setState({ b: parseInt(t0 + n * parseFloat(h)) });
+        else if (id==="t0" && t0 && n && h) this.setState({ tf: parseInt(t0 + n * parseFloat(h)) });
     };
 
     render() {
         const { classes, onSubmit } = this.props;
-        const { n, h, b } = this.state;
+        const { n, h, tf } = this.state;
         return (
-            <Paper style={{ width: "100%" }} elevation={1}>
+            <Paper style={{ width: "40%" }} elevation={1}>
                 <form className={classes.container} autoComplete="off" onSubmit={e => e.preventDefault() || onSubmit(this.state)}>
                     <Grid container spacing={16}>
                         <Grid item xs={4}>
@@ -64,6 +64,18 @@ class Form extends PureComponent {
                                 margin="normal"
                                 required
                                 className={classes.textField}
+                            />
+                        </Grid>
+                        <Grid item xs={4}>
+                            <TextField
+                                id="tf"
+                                label="tf"
+                                onChange={this.onChange}
+                                margin="normal"
+                                value={tf}
+                                required={!h}
+                                className={classes.textField}
+                     
                             />
                         </Grid>
                         <Grid item xs={4}>
@@ -100,19 +112,7 @@ class Form extends PureComponent {
                                 required
                                 value={h}
                                 className={classes.textField}
-                                required={!b}
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <TextField
-                                id="b"
-                                label="b"
-                                onChange={this.onChange}
-                                margin="normal"
-                                value={b}
-                                required={!h}
-                                className={classes.textField}
+                                required={!tf}
                                 InputLabelProps={{ shrink: true }}
                             />
                         </Grid>
