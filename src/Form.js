@@ -24,7 +24,7 @@ class Form extends PureComponent {
         await this.setState({ [id]: id === "formula" || id === "h" || !value? value : parseInt(value) });
         const { t0, n, h, tf } = this.state;
         if (id==="n" && n){
-             if (tf) this.setState({ h: (t0 + tf)/n });
+             if (tf) this.setState({ h: (tf - t0)/n });
         }
         else if (id==="h" && h){
             if (tf) this.setState({ n: (tf - t0)/parseFloat(h) });
@@ -93,7 +93,6 @@ class Form extends PureComponent {
                                 margin="normal"
                                 required
                                 className={classes.textField}
-                                required
                                 value={n}
                                 InputLabelProps={{ shrink: true }}
                             />
@@ -111,15 +110,7 @@ class Form extends PureComponent {
                                 InputLabelProps={{ shrink: true }}
                             />
                         </Grid>
-                        <Grid item xs={4}>
-                            <TextField
-                                id="timeout"
-                                label="Intervalo (ms)"
-                                onChange={this.onChange}
-                                margin="normal"
-                                className={classes.textField}
-                            />
-                        </Grid>
+                      
                         <Grid container item xs={12}>
                             <Grid item xs={8} />
                             <Grid item xs={3}>

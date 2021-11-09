@@ -18,16 +18,16 @@ class App extends PureComponent {
   state = {};
 
   onSubmit = values => {
-    const { formula, t0, x0, n, h, timeout} = parseNumbers(values);
+    const { formula, t0, x0, n, h} = parseNumbers(values);
     this.setState({
       simple: euler(formula, t0, x0, n, h),
       mejorado: eulerMejorado(formula, t0, x0, n, h),
       rungeKutta: rungeKutta(formula, t0, x0, n, h),
-      timeout,
+      
     });
   }
   render() {
-    const { simple, mejorado, timeout, rungeKutta } = this.state;
+    const { simple, mejorado, rungeKutta } = this.state;
     simple && console.log ("Simple", simple)
     mejorado && console.log ("Mejorado", mejorado)
     rungeKutta && console.log ("Runge-Kutta", rungeKutta)
@@ -37,14 +37,14 @@ class App extends PureComponent {
           <Form onChange={this.onChange} onSubmit={this.onSubmit} />
         </Grid>
         {simple &&
-          <Grid item xs={12} sm={4}>
-            <Chart values={simple} timeout={timeout} title="Euler" />
+          <Grid item xs={14} sm={4}>
+            <Chart values={simple}  title="Euler" />
           </Grid>}
-        {mejorado && <Grid item xs={12} sm={4}>
-          <Chart values={mejorado} timeout={timeout} title="Euler Mejorado" />
+        {mejorado && <Grid item xs={14} sm={4}>
+          <Chart values={mejorado} title="Euler Mejorado" />
         </Grid>}
-        {rungeKutta && <Grid item xs={12} sm={4}>
-          <Chart values={rungeKutta} timeout={timeout} title="Runge-Kutta(4)" />
+        {rungeKutta && <Grid item xs={14} sm={4}>
+          <Chart values={rungeKutta}  title="Runge-Kutta(4)" />
         </Grid>}
       </Grid>
     );

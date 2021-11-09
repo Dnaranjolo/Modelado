@@ -35,9 +35,9 @@ export default class LineChart extends PureComponent {
         const { title } = this.props;
         return values.length && (<Chart
             width={'100%'}
-            height={'400px'}
+            height={'600px'}
             chartType="LineChart"
-            loader={<div>Loading Chart</div>}
+            loader={<div>Cargando gráfico</div>}
             data={[
                 ['t', 'x'],
                 ...values.map(({ t, x }) => [t, x])
