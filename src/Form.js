@@ -24,16 +24,11 @@ class Form extends PureComponent {
         await this.setState({ [id]: id === "formula" || id === "h" || !value? value : parseInt(value) });
         const { t0, n, h, tf } = this.state;
         if (id==="n" && n){
-            if (h) this.setState({ tf: parseInt(t0 + n * parseFloat(h)) });
-            else if (tf) this.setState({ h: (t0 + tf)/n });
+             if (tf) this.setState({ h: (t0 + tf)/n });
         }
         else if (id==="h" && h){
             if (tf) this.setState({ n: (tf - t0)/parseFloat(h) });
             else if (n) this.setState({ tf: parseInt(t0 + n * parseFloat(h)) });
-        }
-        else if (id==="tf" && tf){
-            if (h) this.setState({ n: (tf - t0)/parseFloat(h) });
-            else if (n) this.setState({ h: (tf - t0) / n });
         }
         else if (id==="t0" && t0 && n && h) this.setState({ tf: parseInt(t0 + n * parseFloat(h)) });
     };
